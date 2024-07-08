@@ -12,8 +12,7 @@ public class TestService {
     public TestService(@Value("${something.something}") String something) {
         this.something = something;
     }
-
     public String helloWorld(String name, String id) {
-        return "Hello " + name + " " + id + something;
+        return name + " " + id + something;
     }
 }
