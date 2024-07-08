@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TestService {
     private final String something;
 
+
     public TestService(@Value("${something.something}") String something) {
         this.something = something;
     }
