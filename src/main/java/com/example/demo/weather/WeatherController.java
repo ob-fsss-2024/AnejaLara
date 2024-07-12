@@ -1,8 +1,11 @@
 package com.example.demo.weather;
 
+import com.example.demo.location.LocationService;
 import com.example.demo.weather.client.WeatherClient;
 import com.example.demo.weather.client.dto.DailyWeather;
 import com.example.demo.weather.client.dto.WeatherResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +15,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*")
 @RequestMapping("weather")
 public class WeatherController {
+    private final Logger logger = LoggerFactory.getLogger(LocationService.class.getName());
     private final WeatherClient weatherClient;
 
     public WeatherController(final WeatherClient weatherClient) {
@@ -20,6 +24,7 @@ public class WeatherController {
 
     @GetMapping("/forecast")
     public WeatherResponse getWeather(@RequestParam final Double latitude, @RequestParam final Double longitude) {
+        logger.info("Getting weather information for coordinates: " + latitude + ", " + longitude);
         WeatherResponse response = weatherClient.getWeather(latitude, longitude);
         DailyWeather daily = response.daily();
 
